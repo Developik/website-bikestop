@@ -6,7 +6,7 @@ initialize();
 // Create a Checkout Session
 async function initialize() {
   const fetchClientSecret = async () => {
-    const response = await fetch("http://localhost:5000/create-checkout-session", {
+    const response = await fetch("http://localhost:5001/create-checkout-session", {
       method: "POST",
     });
 
