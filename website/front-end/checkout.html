@@ -1,22 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Buy cool new product</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://js.stripe.com/v3/"></script>
-  </head>
-  <body>
-    <section>
-      <div class="product">
-        <img src="product_imagejpg.jpg" alt="The cover of Stubborn Attachments" />
-        <div class="description">
-          <h3>Stubborn Attachments</h3>
-          <h5>$20.00</h5>
-        </div>
+
+<head>
+  <title>Buy cool new product</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+
+<body>
+  <section>
+    <div class="product">
+      <img src="product_imagejpg.jpg" alt="The cover of Stubborn Attachments" />
+      <div class="description">
+        <h3 id="rental_location_name">Stubborn Attachments</h3>
+        <h5>$20.00</h5>
       </div>
-      <form action="http://localhost:5000/create-checkout-session" method="POST">
-        <button type="submit" id="checkout-button">Checkout</button>
-      </form>
-    </section>
-  </body>
+    </div>
+    <form action="http://localhost:5000/create-checkout-session" method="POST">
+      <button type="submit" id="checkout-button">Checkout</button>
+    </form>
+  </section>
+
+  <script>
+
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    // Function to execute when the document is loaded
+    function onLoad() {
+      console.log('Document is loaded.');
+      // Add your code here
+      var locationName = getParameterByName('location_name');
+      console.log(locationName);
+      document.getElementById("rental_location_name").textContent = locationName;
+    }
+
+    // Add an event listener for the 'DOMContentLoaded' event
+    document.addEventListener('DOMContentLoaded', onLoad);    // Get the location_name parameter from the URL
+
+
+  </script>
+</body>
+
 </html>

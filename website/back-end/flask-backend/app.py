@@ -42,7 +42,7 @@ FRONT_END_DOMAIN = 'http://localhost:5500'
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
     try:
-        PRICE_ID = "price_1PAD0nA9jJc3aGYgPMyBdHi5"
+        PRICE_ID = "price_1PAEAqA9jJc3aGYg642Ml6xp"
 
         checkout_session = stripe.checkout.Session.create(
             line_items=[
@@ -54,7 +54,7 @@ def create_checkout_session():
             ],
             mode='payment',
             success_url=FRONT_END_DOMAIN + '/success.html',
-            cancel_url=FRONT_END_DOMAIN + '/cancel.html',
+            cancel_url=FRONT_END_DOMAIN + '/map_rack.html',
         )
     except Exception as e:
         return str(e)
