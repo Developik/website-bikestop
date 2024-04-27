@@ -1,0 +1,16 @@
+INSERT INTO public.rack_locations ("rackID", location_name, location_x, location_y, description) VALUES
+(1, 'Red River Meeting Room', 49.892086, -97.137574, 'Convenient location for business meetings with a view of the Red River.'),
+(2, 'City Center Storage', 49.895078, -97.142578, 'Central spot for easy access to downtown attractions and shopping districts.'),
+(3, 'Downtown Hub', 49.887623, -97.145937, 'Located in the heart of downtown Winnipeg, adjacent to public transportation hubs.'),
+(4, 'Skyline Depot', 49.888732, -97.131207, 'Ideal location for commuters, surrounded by cafes and restaurants.'),
+(5, 'Commerce Corner Rack', 49.893541, -97.136942, 'Central location near popular shopping districts, perfect for retail storage.'),
+(6, 'Metro Meeting Room', 49.888186, -97.139785, 'Near downtown attractions and entertainment venues, ideal for business meetings.'),
+(7, 'Plaza Point Storage', 49.891247, -97.140398, 'Located in a bustling commercial area, with easy access to public amenities.'),
+(8, 'Urban Junction Rack', 49.890623, -97.134557, 'Convenient location for commuters, with access to major thoroughfares.'),
+(9, 'Gateway Rack', 49.886275, -97.135887, 'Close to downtown attractions and transportation hubs, with a view of the city skyline.'),
+(10, 'Riverfront Storage', 49.891754, -97.132946, 'Prime location near the riverfront, offering scenic views and easy access to downtown amenities.');
+
+
+
+
+
