@@ -284,5 +284,5 @@ with app.app_context():
     # Preload some data
     RackLocation.preload_data()
 
-app.run(host="0.0.0.0", port=8080, threaded=True)
+app.run(host="0.0.0.0", port=5001, threaded=True)
 
