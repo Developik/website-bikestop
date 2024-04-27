@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <style>
+        #map {
+            height: 90vh;
+        }
+
+        .leaflet-control {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .mode-selector {
+            position: absolute;
+            top: 10em;
+            left: 1em;
+            z-index: 1000;
+            background-color: rgba(199, 194, 194, 0.9);
+            padding: 1em;
+            border-radius: 15%;
+        }
+
+        .mode-selector label {
+            font-weight: bold;
+        }
+
+        .mode-select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+
+        .obj-input-text {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map">
+
+    </div>
+
+    <div class="mode-selector">
+        <label for="mode-select">Select Mode:</label><br>
+        <select id="mode-select" class="mode-select" style="margin-bottom: 1em;">
+            <option value="select">Select Action</option>
+            <option value="add">Add Object</option>
+            <option value="search">Search Object Text</option>
+            <option value="delete">Delete Object</option>
+        </select><br>
+        <select id="add-select" class="mode-select" style="display: none;">
+            <option value="select">Select Add Action</option>
+            <option value="marker">Add Marker</option>
+            <option value="polyline">Draw Polyline</option>
+            <option value="polygon">Draw Polygon</option>
+        </select>
+        <select id="delete-select" class="mode-select" style="display: none;">
+            <option value="select">Select Delete Action</option>
+            <option value="marker">Delete Marker</option>
+            <option value="polyline">Delete Polyline</option>
+            <option value="polygon">Delete Polygon</option>
+        </select>
+
+        <textarea id="object-input" style="display: none; margin-top: 1em; " rows="2" cols="30"
+            placeholder="Enter Text for Map Objects" class="obj-input-text"></textarea>
+        
+        <div id="object-input-search-wrapper" style="display: none;">
+            <input id="object-input-search" style="margin-top: 1em" placeholder="Object Text Search" class="obj-input-text"></input>
+            <button class="obj-input-text" style="border-color: blue;"
+                onclick="searchTextInObjects()">Search</button>
+            <textarea id="search-results" style="margin-top: 1em; display: block; background-color: rgba(255, 255, 255, 0.6)" 
+                rows="2" cols="30" disabled class="obj-input-text"></textarea>
+        </div>
+    </div>
+
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 13); // Set initial map view
+        var drawnMarkers = new L.FeatureGroup();
+        var drawnPolylines = new L.FeatureGroup();
+        var drawnPolygons = new L.FeatureGroup();
+
+        var textArray = [];
+        var objCounter = 0;
+
+        var mode
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        function searchTextInObjects() {
+            var matchingTexts = [];
+            var searchText = document.getElementById('object-input-search').value;
+            textArray.forEach(function(item) {
+                console.log(item);
+                if (item.text.startsWith(searchText)) {
+                    matchingTexts.push("Obj_ID:" + item.id + " | " + "Text: " + item.text + "\n");
+                }
+            });
+            console.log(matchingTexts);
+
+            
+
+            document.getElementById('search-results').value = matchingTexts;
+        }
+
+        var marker;
+        function createMarker(e) {
+            marker = L.marker(e.latlng);
+            drawnMarkers.addLayer(marker);
+
+            var text = document.getElementById('object-input').value;
+            marker.bindPopup(text);
+
+            marker.on('click', function (e) {
+                var modeSelect = document.getElementById('mode-select').value;
+                var deleteSelect = document.getElementById('delete-select').value;
+
+                if (deleteSelect == 'marker' && modeSelect == 'delete')
+                    e.target.remove();
+            });
+            
+            textArray.push({'id': objCounter, 'text': text});
+            objCounter++;
+        }
+
+        var polyline;
+        function createPolyline(e) {
+            if (!polyline) {
+                polyline = L.polyline([e.latlng], { color: 'red' });
+                drawnPolylines.addLayer(polyline);
+            } else {
+                polyline.addLatLng(e.latlng);
+            }
+
+            var text = document.getElementById('object-input').value;
+            polyline.bindPopup(text);
+
+            polyline.on('click', function (e) {
+                var modeSelect = document.getElementById('mode-select').value;
+                var deleteSelect = document.getElementById('delete-select').value;
+
+                if (deleteSelect == 'polyline' && modeSelect == 'delete') {
+                    e.target.remove();
+                    polyline = null;
+                }
+            });
+
+            textArray.push({'id': objCounter, 'text': text});
+            objCounter++;
+        }
+
+        var polygon;
+        function createPolygon(e) {
+            if (!polygon) {
+                polygon = L.polygon([e.latlng], { color: 'blue' });
+                drawnPolygons.addLayer(polygon);
+            } else {
+                polygon.addLatLng(e.latlng);
+            }
+
+            var text = document.getElementById('object-input').value;
+            polygon.bindPopup(text);
+
+            polygon.on('click', function (e) {
+                var modeSelect = document.getElementById('mode-select').value;
+                var deleteSelect = document.getElementById('delete-select').value;
+
+                if (deleteSelect == 'polygon' && modeSelect == 'delete') {
+                    e.target.remove();
+                    polygon = null;
+                }
+            });
+
+            textArray.push({'id': objCounter, 'text': text});
+            objCounter++;
+        }
+
+        var modeSelect = document.getElementById('mode-select');
+        var addSelect = document.getElementById('add-select');
+        var deleteSelect = document.getElementById('delete-select');
+        var objectInput = document.getElementById('object-input');
+        var objectInputSearchWrapper = document.getElementById('object-input-search-wrapper');
+
+        function changeSelectAddDeleteMode() {
+            var mode = modeSelect.value;
+            switch (mode) {
+                case 'add':
+                    objectInputSearchWrapper.style.display = 'none';
+                    addSelect.style.display = 'block';
+                    objectInput.style.display = 'block';
+                    deleteSelect.style.display = 'none';
+                    break;
+                case 'delete':
+                    objectInputSearchWrapper.style.display = 'none';
+                    addSelect.style.display = 'none';
+                    objectInput.style.display = 'none';
+                    deleteSelect.style.display = 'block';
+                    break;
+                case 'search':
+                    objectInputSearchWrapper.style.display = 'block';
+                    addSelect.style.display = 'none';
+                    objectInput.style.display = 'none';
+                    deleteSelect.style.display = 'none';
+                    break;
+                default:
+                    objectInputSearchWrapper.style.display = 'none';
+                    addSelect.style.display = 'none';
+                    objectInput.style.display = 'none';
+                    deleteSelect.style.display = 'none';
+                    break;
+            }
+        }
+
+        function changeAddMode() {
+            var mode = addSelect.value;
+            switch (mode) {
+                case 'marker':
+                    map.off('click');
+                    map.on('click', createMarker);
+                    break;
+                case 'polyline':
+                    map.off('click');
+                    map.on('click', createPolyline);
+                    break;
+                case 'polygon':
+                    map.off('click');
+                    map.on('click', createPolygon);
+                    break;
+                default:
+                    map.off('click');
+                    break;
+            }
+        }
+
+
+        modeSelect.addEventListener('change', changeSelectAddDeleteMode);
+        addSelect.addEventListener('change', changeAddMode);
+
+        drawnMarkers.addTo(map);
+        drawnPolylines.addTo(map);
+        drawnPolygons.addTo(map);
+
+    </script>
+</body>
+
+</html>
