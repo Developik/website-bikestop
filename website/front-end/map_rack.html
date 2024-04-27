@@ -7,8 +7,57 @@
     <title>Simple Web Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
     <style>
+       /* Style for the caption */
+        /* Style for the caption container */
+        #page-caption {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            margin-top: 10px;
+            margin-bottom: 10px; /* Added margin below the caption */
+            font-weight: bold; /* Make the caption bold */
+        }
+
+        /* Style for the logo within the caption */
+        #logo {
+            width: 100px; /* Adjust the width of the logo */
+            height: auto;
+            margin-right: 10px; /* Adjust the right margin of the logo */
+        }
+
+        /* Style to move the map down */
+        /* #map-container {
+            margin-top: 30px; /* Adjust the top margin to move the map down 
+        } */
+
+        /* Your existing CSS styles for #map and .mode-selector */
         #map {
-            height: 90vh;
+            height: 80vh; /* Adjust map height as needed */
+        }
+
+                /* Center the button horizontally */
+                .button-container {
+            text-align: center;
+            margin-top: 20px; /* Adjust margin as needed */
+        }
+
+        /* Style for the button */
+        #locate-btn {
+            display: inline-block;
+            padding: 10px 20px; /* Adjust padding to increase button size */
+            font-size: 1.2em; /* Adjust font size */
+            font-weight: bold;
+            color: #fff; /* Text color */
+            background-color: #007bff; /* Button background color */
+            border: 2px solid #007bff; /* Border thickness and color */
+            border-radius: 10px; /* Rounded corners */
+            cursor: pointer;
+        }
+
+        /* Hover effect for the button */
+        #locate-btn:hover {
+            background-color: #0056b3; /* Darker background color on hover */
         }
 
         .leaflet-control {
@@ -44,13 +93,137 @@
         }
     </style>
 </head>
-
+ 
 <body>
+    <div id="page-caption">
+        <img id="logo" src="CompanyLogo.png">
+        Winnipeg EV Bike Racks
+    </div>
+
     <div id="map">
 
     </div>
 
-    <div class="mode-selector">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <div class="button-container">
+        <button id="locate-btn">Find Closest Rack</button>
+    </div>
+
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 13); // Set initial map view
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+            // Define the locations JSON array
+    var locations = [{"description":"Convenient location for business meetings with a view of the Red River.","location_name":"Red River Meeting Room","location_x":"49.892086","location_y":"-97.137574","rackID":1},
+        {"description":"Central spot for easy access to downtown attractions and shopping districts.","location_name":"City Center Storage","location_x":"49.895078","location_y":"-97.142578","rackID":2},
+        {"description":"Located in the heart of downtown Winnipeg, adjacent to public transportation hubs.","location_name":"Downtown Hub","location_x":"49.887623","location_y":"-97.145937","rackID":3},
+        {"description":"Ideal location for commuters, surrounded by cafes and restaurants.","location_name":"Skyline Depot","location_x":"49.888732","location_y":"-97.131207","rackID":4},
+        {"description":"Central location near popular shopping districts, perfect for retail storage.","location_name":"Commerce Corner Rack","location_x":"49.893541","location_y":"-97.136942","rackID":5},
+        {"description":"Near downtown attractions and entertainment venues, ideal for business meetings.","location_name":"Metro Meeting Room","location_x":"49.888186","location_y":"-97.139785","rackID":6},
+        {"description":"Located in a bustling commercial area, with easy access to public amenities.","location_name":"Plaza Point Storage","location_x":"49.891247","location_y":"-97.140398","rackID":7},
+        {"description":"Convenient location for commuters, with access to major thoroughfares.","location_name":"Urban Junction Rack","location_x":"49.890623","location_y":"-97.134557","rackID":8},
+        {"description":"Close to downtown attractions and transportation hubs, with a view of the city skyline.","location_name":"Gateway Rack","location_x":"49.886275","location_y":"-97.135887","rackID":9},
+        {"description":"Prime location near the riverfront, offering scenic views and easy access to downtown amenities.","location_name":"Riverfront Storage","location_x":"49.891754","location_y":"-97.132946","rackID":10}
+    ];
+
+    // Array to store marker instances
+    var markers = [];
+
+    // Iterate over the locations array and add markers to the map
+    locations.forEach(function(location) {
+    var marker = L.marker([parseFloat(location.location_x), parseFloat(location.location_y)])
+        .bindPopup(`<b>${location.location_name}</b><br>${location.description}`)
+        .addTo(map);
+
+    markers.push(marker); // Add marker to the markers array
+    });
+
+    markers.forEach(function(marker) {
+    // Add click event listener to each marker
+    marker.on('click', function() {
+        // Construct Google Maps URL with marker's latitude and longitude
+        var lat = marker.getLatLng().lat;
+        var lng = marker.getLatLng().lng;
+        var googleMapsUrl = 'https://www.google.com/maps?q=' + lat + ',' + lng;
+
+        // Open the Google Maps URL in a new tab
+        window.open(googleMapsUrl, '_blank');
+        });
+    });
+
+
+    // Create a feature group from the markers array
+    var markerGroup = L.featureGroup(markers);
+
+    // Fit the map view to the bounds of the marker group
+    map.fitBounds(markerGroup.getBounds());
+
+    document.getElementById('locate-btn').addEventListener('click', function() {
+    // Check if geolocation is supported by the browser
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var userLatLng = L.latLng(position.coords.latitude, position.coords.longitude);
+            console.log('User Location:', userLatLng);
+
+            var closestMarker = findClosestMarker(userLatLng);
+            console.log('Closest Marker:', closestMarker);
+
+            if (closestMarker instanceof L.Marker) {
+                // Highlight the closest marker in red
+                //closestMarker.setStyle({ color: 'red' });
+                var redIcon = L.icon({
+                    iconUrl: 'red-marker.png',
+                    iconSize: [80, 80],
+                    iconAnchor: [16, 32],
+                    popupAnchor: [0, -32]
+                });
+
+                closestMarker.setIcon(redIcon);
+
+                // Zoom the map to the closest marker
+                map.setView(closestMarker.getLatLng(), 15); // Adjust zoom level as needed
+            } else {
+                console.error('closestMarker is not a valid Leaflet marker object:', closestMarker);
+                alert('An error occurred while finding the closest marker.');
+            }
+        }, function(error) {
+            alert('Error getting your location: ' + error.message);
+        });
+    } else {
+        alert('Geolocation is not supported by your browser.');
+    }
+});
+
+
+    // Function to find the closest marker to a given point
+    function findClosestMarker(point) {
+        var closestMarker = null;
+        var closestDistance = Infinity;
+
+        markers.forEach(function(marker) {
+            var distance = point.distanceTo(marker.getLatLng());
+             // Log distance for debugging
+
+            if (distance < closestDistance) {
+                closestMarker = marker;
+                closestDistance = distance;
+            }
+        });
+        console.log(closestDistance);
+        return closestMarker;
+    }
+
+    </script>
+
+</body>
+
+</html>
+
+    <!-- <div class="mode-selector">
         <label for="mode-select">Select Mode:</label><br>
         <select id="mode-select" class="mode-select" style="margin-bottom: 1em;">
             <option value="select">Select Action</option>
@@ -81,11 +254,49 @@
             <textarea id="search-results" style="margin-top: 1em; display: block; background-color: rgba(255, 255, 255, 0.6)" 
                 rows="2" cols="30" disabled class="obj-input-text"></textarea>
         </div>
-    </div>
+    </div> -->
 
+    <!-- <script>
+        Function to handle the button click event
+    document.getElementById('locate-btn').addEventListener('click', function() {
+        // Check if geolocation is supported by the browser
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var userLatLng = L.latLng(position.coords.latitude, position.coords.longitude);
+                var closestMarker = findClosestMarker(userLatLng);
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
+                // Highlight the closest marker in red
+                closestMarker.setStyle({ color: 'red' });
+
+                // Zoom the map to the closest marker
+                map.setView(closestMarker.getLatLng(), 15); // Adjust zoom level as needed
+            }, function(error) {
+                alert('Error getting your location: ' + error.message);
+            });
+        } else {
+            alert('Geolocation is not supported by your browser.');
+        }
+    });
+
+    // Function to find the closest marker to a given point
+    function findClosestMarker(point) {
+        var closestMarker = null;
+        var closestDistance = Infinity;
+
+        markers.forEach(function(marker) {
+            var distance = point.distanceTo(marker.getLatLng());
+            if (distance < closestDistance) {
+                closestMarker = marker;
+                closestDistance = distance;
+            }
+        });
+
+        return closestMarker;
+    }
+
+    </script> -->
+
+    <!-- <script>
         var map = L.map('map').setView([51.505, -0.09], 13); // Set initial map view
         var drawnMarkers = new L.FeatureGroup();
         var drawnPolylines = new L.FeatureGroup();
@@ -253,7 +464,4 @@
         drawnPolylines.addTo(map);
         drawnPolygons.addTo(map);
 
-    </script>
-</body>
-
-</html>
+    </script> -->
