@@ -155,6 +155,18 @@
                 <div class="rightside">
                     <form action="http://localhost:5001/create-checkout-session" method="POST">
                         <h3 id="rental_location_name"></h3>
+                        <label for="dropdown">Amount of Hours</label>
+                        <select id="hours_hidden" name="dropdown"
+                          style="border-radius: 25%; width: 4em; height: 3em;">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
                         <button type="submit" class="button" id="checkout-button">Checkout</button>
                     </form>
                 </div>
