@@ -42,14 +42,20 @@ FRONT_END_DOMAIN = 'http://localhost:5500'
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
     try:
-        PRICE_ID = "price_1PAEAqA9jJc3aGYg642Ml6xp"
+        PRICE_ID = "price_1PAMCcA9jJc3aGYgTBMRZMN0"
+
+        print(request.args)
+        #print(request.POST)
+        print(request.form)
+
+        quantity = request.form['dropdown']
 
         checkout_session = stripe.checkout.Session.create(
             line_items=[
                 {
                     # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
                     'price': f'{PRICE_ID}',
-                    'quantity': 1,
+                    'quantity': f'{quantity}',
                 },
             ],
             mode='payment',
