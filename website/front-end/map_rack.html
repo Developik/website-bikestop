@@ -174,14 +174,44 @@
         { "description": "Prime location near the riverfront, offering scenic views and easy access to downtown amenities.", "location_name": "Riverfront Storage", "location_x": "49.891754", "location_y": "-97.132946", "rackID": 10 }
         ];
 
-        function payForLocation(location_name) {
-            location.href = '/checkout.html?location_name='+ location_name;
+        function payForLocation(location_name, x, y) {
+            location.href = '/checkout.html?location_name=' + location_name;
+        }
+
+        function getAddressFromCoordinates(latitude, longitude) {
+            // Construct the URL for OpenStreetMap Nominatim reverse geocoding
+            const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+
+            // Make a GET request to the Nominatim API
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Check if the response contains address details
+                    if (data.address) {
+                        // Construct the address string
+                        let address = "";
+                        if (data.address.road) address += data.address.road + ", ";
+                        if (data.address.city) address += data.address.city + ", ";
+                        if (data.address.state) address += data.address.state + ", ";
+                        if (data.address.country) address += data.address.country;
+
+                        console.log("Address:", address);
+                        return address;
+                    } else {
+                        console.error("No address found for the given coordinates.");
+                        return null;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching address:", error);
+                    return null;
+                });
         }
 
         function goToLocation(lat, lng) {
             var googleMapsUrl = 'https://www.google.com/maps?q=' + lat + ',' + lng;
 
-        // Open the Google Maps URL in a new tab
+            // Open the Google Maps URL in a new tab
             window.open(googleMapsUrl, '_blank');
         }
 
@@ -197,7 +227,7 @@
             <div>
                 <b>${location.location_name}</b>
                 <br>${location.description}<br><br>
-                <button id="button_rack" onclick="payForLocation('${location.location_name}')">Rent a Spot</button>
+                <button id="button_rack" onclick="payForLocation('${location.location_name}', '${x}', '${y}')">Rent a Spot</button>
                 <button id="button_rack_go_to"
                     onclick="goToLocation(${x}, ${y})">Go to</button>
             </div>

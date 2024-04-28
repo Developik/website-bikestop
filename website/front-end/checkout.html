@@ -2,243 +2,309 @@
 <html>
 
 <head>
-    <title>Buy cool new product</title>
-    <script src="https://js.stripe.com/v3/"></script>
-    <link rel="icon" type="image/png" href="images/logo.png">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif !important;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <title>Buy cool new product</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif !important;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .mainscreen {
-            min-height: 100vh;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            background-color: #DFDBE5;
-            background-image: url("https://wallpaperaccess.com/full/3063067.png");
-            color: #963E7B;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
+    .mainscreen {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background-color: #DFDBE5;
+      background-image: url("https://wallpaperaccess.com/full/3063067.png");
+      color: #963E7B;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
 
-        .card {
-            width: 60rem;
-            margin: auto;
-            background: white;
-            position: center;
-            align-self: center;
-            top: 50rem;
-            border-radius: 1.5rem;
-            box-shadow: 4px 3px 20px #3535358c;
-            display: flex;
-            flex-direction: row;
+    .card {
+      width: 60rem;
+      margin: auto;
+      background: white;
+      position: center;
+      align-self: center;
+      top: 50rem;
+      border-radius: 1.5rem;
+      box-shadow: 4px 3px 20px #3535358c;
+      display: flex;
+      flex-direction: row;
 
-        }
+    }
 
-        .leftside {
-            background: #030303;
-            width: 25rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-top-left-radius: 1.5rem;
-            border-bottom-left-radius: 1.5rem;
-        }
+    .leftside {
+      background: #030303;
+      width: 25rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-top-left-radius: 1.5rem;
+      border-bottom-left-radius: 1.5rem;
+    }
 
-        .product {
-            object-fit: cover;
-            width: 20em;
-            height: 20em;
-            border-radius: 100%;
-        }
+    .product {
+      object-fit: cover;
+      width: 20em;
+      height: 20em;
+      border-radius: 100%;
+    }
 
-        .rightside {
-            background-color: #ffffff;
-            width: 35rem;
-            border-bottom-right-radius: 1.5rem;
-            border-top-right-radius: 1.5rem;
-            padding: 1rem 2rem 3rem 3rem;
-        }
+    .rightside {
+      background-color: #ffffff;
+      width: 35rem;
+      border-bottom-right-radius: 1.5rem;
+      border-top-right-radius: 1.5rem;
+      padding: 1rem 2rem 3rem 3rem;
+    }
 
-        p {
-            display: block;
-            font-size: 1.1rem;
-            font-weight: 400;
-            margin: .8rem 0;
-        }
+    p {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin: .8rem 0;
+    }
 
-        .inputbox {
-            color: #030303;
-            width: 100%;
-            padding: 0.5rem;
-            border: none;
-            border-bottom: 1.5px solid #ccc;
-            margin-bottom: 1rem;
-            border-radius: 0.3rem;
-            font-family: 'Roboto', sans-serif;
-            color: #615a5a;
-            font-size: 1.1rem;
-            font-weight: 500;
-            outline: none;
-        }
+    .inputbox {
+      color: #030303;
+      width: 100%;
+      padding: 0.5rem;
+      border: none;
+      border-bottom: 1.5px solid #ccc;
+      margin-bottom: 1rem;
+      border-radius: 0.3rem;
+      font-family: 'Roboto', sans-serif;
+      color: #615a5a;
+      font-size: 1.1rem;
+      font-weight: 500;
+      outline: none;
+    }
 
-        .expcvv {
-            display: flex;
-            justify-content: space-between;
-            padding-top: 0.6rem;
-        }
+    .expcvv {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 0.6rem;
+    }
 
-        .expcvv_text {
-            padding-right: 1rem;
-        }
+    .expcvv_text {
+      padding-right: 1rem;
+    }
 
-        .expcvv_text2 {
-            padding: 0 1rem;
-        }
+    .expcvv_text2 {
+      padding: 0 1rem;
+    }
 
-        .button {
-            background: linear-gradient(135deg, #753370 0%, #298096 100%);
-            padding: 15px;
-            border: none;
-            border-radius: 50px;
-            color: white;
-            font-weight: 400;
-            font-size: 1.2rem;
-            margin-top: 10px;
-            width: 100%;
-            letter-spacing: .11rem;
-            outline: none;
-        }
+    .button {
+      background: linear-gradient(135deg, #753370 0%, #298096 100%);
+      padding: 15px;
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: 400;
+      font-size: 1.2rem;
+      margin-top: 10px;
+      width: 100%;
+      letter-spacing: .11rem;
+      outline: none;
+    }
 
-        .button:hover {
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 3px 3px 6px #38373785;
-        }
+    .button:hover {
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 3px 3px 6px #38373785;
+    }
 
-        @media only screen and (max-width: 1000px) {
-            .card {
-                flex-direction: column;
-                width: auto;
+    @media only screen and (max-width: 1000px) {
+      .card {
+        flex-direction: column;
+        width: auto;
 
-            }
+      }
 
-            .leftside {
-                width: 100%;
-                border-top-right-radius: 0;
-                border-bottom-left-radius: 0;
-                border-top-right-radius: 0;
-                border-radius: 0;
-            }
+      .leftside {
+        width: 100%;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 0;
+        border-radius: 0;
+      }
 
-            .rightside {
-                width: auto;
-                border-bottom-left-radius: 1.5rem;
-                padding: 0.5rem 3rem 3rem 2rem;
-                border-radius: 0;
-            }
+      .rightside {
+        width: auto;
+        border-bottom-left-radius: 1.5rem;
+        padding: 0.5rem 3rem 3rem 2rem;
+        border-radius: 0;
+      }
 
-            #hours_hidden {
-                font-size: 3rem;
-                height: 10rem;
-                width: 40%;
-                margin-left: 1rem;
-                text-align: center;
-            }
+      #hours_hidden {
+        font-size: 3rem;
+        height: 10rem;
+        width: 40%;
+        margin-left: 1rem;
+        text-align: center;
+      }
 
-            #hours_hidden_wrapper {
-                margin-left: auto;
-                margin-right: 0;
-            }
+      #hours_hidden_wrapper {
+        margin-left: auto;
+        margin-right: 0;
+      }
 
-            #checkout-button {
-                background: linear-gradient(135deg, #753370 0%, #298096 100%);
-                padding: 15px;
-                border: none;
-                border-radius: 50px;
-                color: white;
-                font-weight: 400;
-                font-size: 5rem;
-                margin-top: 5rem;
-                width: 100%;
-                letter-spacing: .22rem;                                                                                                 outline: none;
-            }
+      #checkout-button {
+        background: linear-gradient(135deg, #753370 0%, #298096 100%);
+        padding: 15px;
+        border: none;
+        border-radius: 50px;
+        color: white;
+        font-weight: 400;
+        font-size: 5rem;
+        margin-top: 5rem;
+        width: 100%;
+        letter-spacing: .22rem;
+        outline: none;
+      }
 
-            #rental_location_name {
-                font-size:3rem;
-            }
+      #rental_location_name {
+        font-size: 3rem;
+      }
 
-            label {
-                font-size:3rem;
-            }
-            
-        }
-    </style>
+      label {
+        font-size: 3rem;
+      }
+
+    }
+  </style>
 </head>
 
 <body>
-    <section>
+  <section>
 
 
-        <div class="mainscreen">
-            <!-- <img src="https://image.freepik.com/free-vector/purple-background-with-neon-frame_52683-34124.jpg"  class="bgimg " alt="">-->
-            <div class="card">
-                <div class="leftside">
-                    <img src="product_imagejpg.jpg"
-                        class="product" alt="Shoes" />
-                </div>
-                <div class="rightside">
-                    <form action="http://4.172.201.108:5001/create-checkout-session" method="POST">
-                        <h3 id="rental_location_name"></h3>
-                        <label for="dropdown">Amount of Hours</label>
-                        <select id="hours_hidden" name="dropdown"
-                          style="border-radius: 25%; width: 4em; height: 3em;">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                        </select>
-                        <button type="submit" class="button" id="checkout-button">Checkout</button>
-                    </form>
-                </div>
-            </div>
+    <div class="mainscreen">
+      <!-- <img src="https://image.freepik.com/free-vector/purple-background-with-neon-frame_52683-34124.jpg"  class="bgimg " alt="">-->
+      <div class="card">
+        <div class="leftside">
+          <img src="product_imagejpg.jpg" class="product" alt="Shoes" />
         </div>
+        <div class="rightside">
+          <form action="http://4.172.201.108:5001/create-checkout-session" method="POST">
+            <h3 id="rental_location_name"></h3>
+            <div id="address">
+              <h4 id="address_name"></h4>
+            </div>
 
-    </section>
+            <label for="dropdown">Amount of Hours</label>
+            <select id="hours_hidden" name="dropdown" style="border-radius: 25%; width: 4em; height: 3em;">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+            <button type="submit" class="button" id="checkout-button">Checkout</button>
+          </form>
+        </div>
+      </div>
+    </div>
 
-    <script>
+  </section>
 
-        function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, "\\$&");
-            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, " "));
-        }
+  <script>
 
-        // Function to execute when the document is loaded
-        function onLoad() {
-            console.log('Document is loaded.');
-            // Add your code here
-            var locationName = getParameterByName('location_name');
-            console.log(locationName);
-            document.getElementById("rental_location_name").textContent = locationName;
-        }
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
 
-        // Add an event listener for the 'DOMContentLoaded' event
-        document.addEventListener('DOMContentLoaded', onLoad);    // Get the location_name parameter from the URL
+    // Function to execute when the document is loaded
+    function onLoad() {
+      console.log('Document is loaded.');
+      // Add your code here
+      var locationName = getParameterByName('location_name');
+      console.log(locationName);
+      document.getElementById("rental_location_name").textContent = locationName;
+    }
 
-    </script>
+    // Add an event listener for the 'DOMContentLoaded' event
+    document.addEventListener('DOMContentLoaded', onLoad);    // Get the location_name parameter from the URL
+
+
+    var locations = [{ "description": "Convenient location for business meetings with a view of the Red River.", "location_name": "Red River Meeting Room", "location_x": "49.892086", "location_y": "-97.137574", "rackID": 1 },
+    { "description": "Central spot for easy access to downtown attractions and shopping districts.", "location_name": "City Center Storage", "location_x": "49.895078", "location_y": "-97.142578", "rackID": 2 },
+    { "description": "Located in the heart of downtown Winnipeg, adjacent to public transportation hubs.", "location_name": "Downtown Hub", "location_x": "49.887623", "location_y": "-97.145937", "rackID": 3 },
+    { "description": "Ideal location for commuters, surrounded by cafes and restaurants.", "location_name": "Skyline Depot", "location_x": "49.888732", "location_y": "-97.131207", "rackID": 4 },
+    { "description": "Central location near popular shopping districts, perfect for retail storage.", "location_name": "Commerce Corner Rack", "location_x": "49.893541", "location_y": "-97.136942", "rackID": 5 },
+    { "description": "Near downtown attractions and entertainment venues, ideal for business meetings.", "location_name": "Metro Meeting Room", "location_x": "49.888186", "location_y": "-97.139785", "rackID": 6 },
+    { "description": "Located in a bustling commercial area, with easy access to public amenities.", "location_name": "Plaza Point Storage", "location_x": "49.891247", "location_y": "-97.140398", "rackID": 7 },
+    { "description": "Convenient location for commuters, with access to major thoroughfares.", "location_name": "Urban Junction Rack", "location_x": "49.890623", "location_y": "-97.134557", "rackID": 8 },
+    { "description": "Close to downtown attractions and transportation hubs, with a view of the city skyline.", "location_name": "Gateway Rack", "location_x": "49.886275", "location_y": "-97.135887", "rackID": 9 },
+    { "description": "Prime location near the riverfront, offering scenic views and easy access to downtown amenities.", "location_name": "Riverfront Storage", "location_x": "49.891754", "location_y": "-97.132946", "rackID": 10 }
+    ];
+
+    var locationCoordinates = {
+      "Red River Meeting Room": { x: 49.892086, y: -97.137574 },
+      "City Center Storage": { x: 49.895078, y: -97.142578 },
+      "Downtown Hub": { x: 49.887623, y: -97.145937 },
+      "Skyline Depot": { x: 49.888732, y: -97.131207 },
+      "Commerce Corner Rack": { x: 49.893541, y: -97.136942 },
+      "Metro Meeting Room": { x: 49.888186, y: -97.139785 },
+      "Plaza Point Storage": { x: 49.891247, y: -97.140398 },
+      "Urban Junction Rack": { x: 49.890623, y: -97.134557 },
+      "Gateway Rack": { x: 49.886275, y: -97.135887 },
+      "Riverfront Storage": { x: 49.891754, y: -97.132946 }
+    };
+
+    document.addEventListener('DOMContentLoaded', async function () {
+      var locationName = getParameterByName('location_name');
+      console.log(locationCoordinates[locationName]);
+      var x = locationCoordinates[locationName].x;
+      var y = locationCoordinates[locationName].y;
+      getAddressFromCoordinates(x, y)
+        .then(function (address) {
+          console.log(address);
+          // Set the value after the Promise resolves
+          document.getElementById("address_name").textContent = address['display_name'];
+        })
+        .catch(function (error) {
+          console.error("Error fetching address:", error);
+          // Handle error if needed
+        });
+    });
+
+    function getAddressFromCoordinates(latitude, longitude) {
+      // Construct the URL for OpenStreetMap Nominatim reverse geocoding
+      const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+
+      // Make a GET request to the Nominatim API
+      return fetch(url)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          // Check if the response contains address details
+          console.log(data);
+          return data;
+        })
+        .catch(function (error) {
+          console.error("Error fetching address:", error);
+          return null;
+        });
+    }
+
+  </script>
 
 
 </body>
