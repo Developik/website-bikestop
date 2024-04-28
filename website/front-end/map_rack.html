@@ -140,7 +140,9 @@
 
 <body>
     <div id="page-caption">
-        <img id="logo" src="CompanyLogo.png">
+        <a href="/">
+        <img id="logo" href="/" src="CompanyLogo.png">
+        </a>
         Winnipeg EV Bike Racks
     </div>
 
@@ -163,16 +165,16 @@
 
         // Define the locations JSON array
         var locations = [{ "description": "Convenient location for business meetings with a view of the Red River.", "location_name": "Red River Meeting Room", "location_x": "49.892086", "location_y": "-97.137574", "rackID": 1 },
-        { "description": "Central spot for easy access to downtown attractions and shopping districts.", "location_name": "City Center Storage", "location_x": "49.895078", "location_y": "-97.142578", "rackID": 2 },
-        { "description": "Located in the heart of downtown Winnipeg, adjacent to public transportation hubs.", "location_name": "Downtown Hub", "location_x": "49.887623", "location_y": "-97.145937", "rackID": 3 },
-        { "description": "Ideal location for commuters, surrounded by cafes and restaurants.", "location_name": "Skyline Depot", "location_x": "49.888732", "location_y": "-97.131207", "rackID": 4 },
-        { "description": "Central location near popular shopping districts, perfect for retail storage.", "location_name": "Commerce Corner Rack", "location_x": "49.893541", "location_y": "-97.136942", "rackID": 5 },
-        { "description": "Near downtown attractions and entertainment venues, ideal for business meetings.", "location_name": "Metro Meeting Room", "location_x": "49.888186", "location_y": "-97.139785", "rackID": 6 },
-        { "description": "Located in a bustling commercial area, with easy access to public amenities.", "location_name": "Plaza Point Storage", "location_x": "49.891247", "location_y": "-97.140398", "rackID": 7 },
-        { "description": "Convenient location for commuters, with access to major thoroughfares.", "location_name": "Urban Junction Rack", "location_x": "49.890623", "location_y": "-97.134557", "rackID": 8 },
-        { "description": "Close to downtown attractions and transportation hubs, with a view of the city skyline.", "location_name": "Gateway Rack", "location_x": "49.886275", "location_y": "-97.135887", "rackID": 9 },
-        { "description": "Prime location near the riverfront, offering scenic views and easy access to downtown amenities.", "location_name": "Riverfront Storage", "location_x": "49.891754", "location_y": "-97.132946", "rackID": 10 }
-        ];
+            { "description": "Central spot for easy access to downtown attractions and shopping districts.", "location_name": "City Center Storage", "location_x": "49.895078", "location_y": "-97.142578", "rackID": 2 },
+            { "description": "Located in the heart of downtown Winnipeg, adjacent to public transportation hubs.", "location_name": "Downtown Hub", "location_x": "49.887623", "location_y": "-97.145937", "rackID": 3 },
+            { "description": "Ideal location for commuters, surrounded by cafes and restaurants.", "location_name": "Skyline Depot", "location_x": "49.888732", "location_y": "-97.131207", "rackID": 4 },
+            { "description": "Central location near popular shopping districts, perfect for retail storage.", "location_name": "Commerce Corner Rack", "location_x": "49.893541", "location_y": "-97.136942", "rackID": 5 },
+            { "description": "Near downtown attractions and entertainment venues, ideal for business meetings.", "location_name": "Metro Meeting Room", "location_x": "49.888186", "location_y": "-97.139785", "rackID": 6 },
+            { "description": "Located in a bustling commercial area, with easy access to public amenities.", "location_name": "Plaza Point Storage", "location_x": "49.891247", "location_y": "-97.140398", "rackID": 7 },
+            { "description": "Convenient location for commuters, with access to major thoroughfares.", "location_name": "Urban Junction Rack", "location_x": "49.890623", "location_y": "-97.134557", "rackID": 8 },
+            { "description": "Close to downtown attractions and transportation hubs, with a view of the city skyline.", "location_name": "Gateway Rack", "location_x": "49.801783", "location_y": "-97.147622", "rackID": 9 },
+            { "description": "Prime location near the riverfront, offering scenic views and easy access to downtown amenities.", "location_name": "Riverfront Storage", "location_x": "49.891754", "location_y": "-97.132946", "rackID": 10 }
+            ];
 
         function payForLocation(location_name, x, y) {
             location.href = '/checkout.html?location_name=' + location_name;
