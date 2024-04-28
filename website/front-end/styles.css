@@ -1,0 +1,504 @@
+/* Add your colors, fonts, etc. here */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  .navbar {
+    background-color: #ffffff; /* White */
+    overflow: hidden;
+    padding: 20px 10%;
+  }
+  .navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  .navbar a.right {
+    float: right;
+    background-color: #ffc107; /* Yellow */
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+  .logo {
+    float: left;
+    height: 50px; /* or the height you want */
+    margin-right: 20px;
+  }
+  .hero {
+    background-color: #FFFFFF; /* Light blue background */
+    padding: 50px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .hero-image {
+    max-width: 45%; /* Adjust the width as necessary */
+    height: auto;
+    margin-right: 5%; /* Add space between the image and the text */
+  }
+  
+  .hero-text {
+    max-width: 50%; /* Adjust the width as necessary */
+    text-align: left;
+  }
+  .hero h1 {
+    color: #004e89; /* Dark blue text */
+    font-size: 2.5em;
+  }
+  .hero p {
+    color: #333; /* Dark text */
+  }
+  .hero-text button {
+    background-color: #004e89; /* Dark blue */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block; /* Make the button block to occupy its own line */
+  }
+  
+  .mission-section {
+    background-color: #004e89; /* Adjust the color to match your branding */
+    color: white;
+    padding: 40px 10%;
+    text-align: center;
+  }
+  
+  .mission-section h2 {
+    font-size: 2em; /* Adjust the size as needed */
+  }
+  
+  .mission-section p {
+    font-size: 1em; /* Adjust the size as needed */
+  }
+  
+  .mission-section button {
+    background-color: #ffc107; /* Adjust the button color to match your branding */
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .mission-values {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+  }
+  
+  .mission, .values {
+    max-width: 45%; /* Adjust the size as needed */
+  }
+  
+  .mission img, .values img {
+    width: 60px; /* Adjust size as needed */
+    height: auto;
+  }
+  
+  /* //mission/// */
+
+  .mission-section {
+    background-color: #004e89; /* Dark blue background */
+    color: white;
+    padding: 40px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .mission-points {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* This will take care of spacing in the first row */
+    width: 100%; /* Takes the full width */
+  }
+  
+  .point {
+    width: calc(50% - 10px); /* Adjust width for two items per row, minus some margin */
+    margin-bottom: 20px; /* Space between the rows */
+  }
+  
+  .point:last-child {
+    width: calc(50% - 10px); /* Adjust width for the last item */
+    margin-right: auto; /* Pushes the last item to the right */
+  }
+  
+  .point img {
+    width: 60px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 15px; /* Space between the icon and the text */
+  }
+  
+  .point h3 {
+    font-size: 1.2em; /* Adjust the size as needed */
+  }
+  
+  .point p {
+    font-size: 1em; /* Adjust the size as needed */
+  }
+  
+  .mission-text {
+    width: 45%; /* Adjust the width as necessary */
+    text-align: left; /* Align the text to the left */
+  }
+  
+  .mission-text h2 {
+    font-size: 2em; /* Adjust the size as needed */
+  }
+  
+  .mission-text p {
+    font-size: 1em; /* Adjust the size as needed */
+    margin-bottom: 20px; /* Space between the paragraph and the button */
+  }
+  
+  .mission-text button {
+    background-color: #ffc107; /* Yellow */
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Responsive adjustments if needed */
+  @media (max-width: 600px) {
+    .point, .point:last-child {
+      width: 100%; /* Full width for small screens */
+      margin-left: 0; /* Reset margin-left for the last item */
+    }
+  }
+  
+
+  /* third section  */
+
+
+  .locate-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 10%;
+    background: #fff; /* or any color that matches your design */
+  }
+  
+  .locate-image img {
+    max-width: 70%;
+    height: auto;
+  }
+  
+  .locate-content {
+    max-width: 70%; /* Adjust the width as necessary */
+    text-align: left;
+  }
+  
+  .locate-content h3 {
+    font-size: 3em; /* Adjust the size as needed */
+    color: #000; /* Adjust the color as needed */
+  }
+  
+  .locate-content p {
+    margin: 20px 0;
+    color: #666; /* Adjust the color as needed */
+  }
+  
+  .locate-content button {
+    background-color: #ffc107; /* Adjust the button color to match your branding */
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  /* Responsive adjustments if needed */
+  @media (max-width: 768px) {
+    .locate-section {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .locate-content,
+    .locate-image {
+      max-width: 100%;
+    }
+  
+    .locate-content {
+      order: 1; /* Put the text content above the image */
+    }
+  
+    .locate-image {
+      order: 2; /* Put the image below the text content */
+      margin-top: 20px;
+    }
+  }
+  
+
+  .why-bike-stop-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 10%;
+}
+
+.text-area {
+  width: 50%;
+}
+
+.text-area h2 {
+  font-size: 2em; /* Adjust the size as needed */
+  color: #000; /* Adjust the color as needed */
+  margin-bottom: 20px;
+}
+
+.text-area p {
+  margin-bottom: 20px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.icon {
+  display: inline-block;
+  width: 40px; /* Adjust as needed */
+  height: 40px; /* Adjust as needed */
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  color: white;
+  margin-right: 15px;
+}
+
+.feature-text h3 {
+  font-size: 1.2em;
+  color: #000;
+}
+
+.feature-text p {
+  font-size: 1em;
+  color: #666;
+}
+
+.text-area button {
+  background-color: #2196f3; /* Adjust the button color to match your branding */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.image-area {
+  position: relative;
+  width: 50%;
+}
+
+.image-area img {
+  width: 100%;
+  display: block; /* Remove any space below the image */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px; /* Adjust the size as needed */
+  height: 100%;
+}
+
+/* Responsive adjustments if needed */
+@media (max-width: 768px) {
+  .why-bike-stop-section {
+    flex-direction: column;
+  }
+
+  .text-area,
+  .image-area {
+    width: 100%;
+  }
+
+  .image-area {
+    order: -1; /* This will place the image above the text on smaller screens */
+  }
+
+  .overlay {
+    width: 100%;
+    height: 50px; /* Adjust the overlay size for smaller screens */
+  }
+}
+/* the fourth section */
+
+.why-bike-stop-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 10%;
+}
+
+.text-area {
+  width: 50%;
+}
+
+.text-area h2 {
+  font-size: 2em; /* Adjust the size as needed */
+  color: #000; /* Adjust the color as needed */
+  margin-bottom: 20px;
+}
+
+.text-area p {
+  margin-bottom: 20px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.icon {
+  display: inline-block;
+  width: 40px; /* Adjust as needed */
+  height: 40px; /* Adjust as needed */
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  color: white;
+  margin-right: 15px;
+}
+
+.feature-text h3 {
+  font-size: 1.2em;
+  color: #000;
+}
+
+.feature-text p {
+  font-size: 1em;
+  color: #666;
+}
+
+.text-area button {
+  background-color: #004e89; /* Adjust the button color to match your branding */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.image-area {
+  position: relative;
+  width: 50%;
+}
+
+.image-area img {
+  width: 100%;
+  display: block; /* Remove any space below the image */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px; /* Adjust the size as needed */
+  height: 100%;
+}
+
+/* Responsive adjustments if needed */
+@media (max-width: 768px) {
+  .why-bike-stop-section {
+    flex-direction: column;
+  }
+
+  .text-area,
+  .image-area {
+    width: 100%;
+  }
+
+  .image-area {
+    order: -1; /* This will place the image above the text on smaller screens */
+  }
+
+  .overlay {
+    width: 100%;
+    height: 50px; /* Adjust the overlay size for smaller screens */
+  }
+}
+
+  /* Add responsive design adjustments as needed */
+  /* footer */
+
+  .site-footer {
+    background-color: #004e89; /* Dark blue background */
+    color: white;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .footer-content {
+    display: flex;
+    width: 100%;
+    max-width: 1200px; /* Adjust the max-width as needed */
+    margin: auto;
+    justify-content: space-between;
+  }
+  
+  .footer-block {
+    text-align: center;
+  }
+  
+  .footer-logo {
+    max-width: 100px; /* Adjust the width as needed */
+    margin-bottom: 10px;
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .social-icon {
+    display: inline-block;
+    width: 20px; /* Adjust the size as needed */
+    height: 20px; /* Adjust the size as needed */
+    margin: 0 5px;
+    background-color: #333; /* Placeholder background */
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50%;
+    font-size: 16px; /* Adjust the font size as needed */
+    text-decoration: none;
+  }
+  
+  /* Rest of the styles... */
+  
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .footer-block {
+      margin-bottom: 20px;
+    }
+  
+    .social-icons {
+      justify-content: center;
+    }
+  }
+  

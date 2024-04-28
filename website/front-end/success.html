@@ -74,6 +74,35 @@
   <div>
     <button onclick="location.href='/map_rack.html'">Back To Map</button>
   </div>
+
+  <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+        try {
+            const url = 'http://140.193.109.100:80/update'; // Change the URL as needed
+            const params = {}; // Add parameters if necessary
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    //'Content-Type': 'application/json' // Adjust content type as needed
+                },
+                body: JSON.stringify(params)
+            });
+
+            if (response.ok) {
+                // Request was successful
+                const responseData = await response.json(); // Parse response data if JSON
+                console.log(responseData);
+            } else {
+                // Request failed
+                console.error('Request failed:', response.status);
+            }
+        } catch (error) {
+            // Handle any errors
+            console.error('Error:', error);
+        }
+    });
+  </script>
 </body>
 
 </html>
